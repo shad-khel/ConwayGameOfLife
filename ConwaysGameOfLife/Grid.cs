@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConwaysGameOfLife
 {
-    class Grid
+    public class Grid
     {
         private readonly int _universeWidth;
         private readonly int _universeHeight;
@@ -16,10 +16,14 @@ namespace ConwaysGameOfLife
             _universeHeight = universeHeight;
         }
 
+        public UniverseSquare[][] GetUniverse()
+        {
+            return universe;
+        }
+
         public void SeedUniverse()
         {
 
         }
-
     }
 }

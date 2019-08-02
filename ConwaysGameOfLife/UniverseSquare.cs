@@ -27,5 +27,10 @@ namespace ConwaysGameOfLife
         {
             return _state ? "X" : "-";
         }
+
+        public bool IsAlive()
+        {
+            return _state;
+        }
     }
 }
