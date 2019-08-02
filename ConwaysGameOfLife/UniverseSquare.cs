@@ -23,9 +23,9 @@ namespace ConwaysGameOfLife
             _state = true;
         }
 
-        public string Print()
+        public char Print()
         {
-            return _state ? "X" : "-";
+            return _state ? 'X' : '-';
         }
 
         public bool IsAlive()

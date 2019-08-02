@@ -6,30 +6,26 @@ namespace ConwaysGameOfLife
 {
     public class Grid
     {
-        private readonly int _universeWidth;
-        private readonly int _universeHeight;
-        private UniverseSquare[,] universe;
+        private readonly UniverseSquare[,] _universe;
 
         public Grid(int universeWidth, int universeHeight)
         {
-            _universeWidth = universeWidth;
-            _universeHeight = universeHeight;
-            universe = new UniverseSquare[universeWidth, universeHeight];
+            _universe = new UniverseSquare[universeWidth, universeHeight];
         }
 
         public UniverseSquare[,] GetUniverse()
         {
-            return universe;
+            return _universe;
         }
 
         public void SeedUniverse()
         {
-            for (var i = 0; i < universe.GetLength(0); i++)
+            for (var i = 0; i < _universe.GetLength(0); i++)
             {
-                for (var j = 0; j < universe.GetLength(1); j++)
+                for (var j = 0; j < _universe.GetLength(1); j++)
                 {
-                    universe[i, j] = new UniverseSquare();
-                    universe[i,j].SetToRandomState();
+                    _universe[i, j] = new UniverseSquare();
+                    _universe[i,j].SetToRandomState();
                 }
             }
         }

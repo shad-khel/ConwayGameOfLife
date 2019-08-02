@@ -46,6 +46,24 @@ namespace UnitTests
             //Assert
             Assert.True(aliveCheck);
         }
+
+        [Fact]
+        public void PrintLine_PrintTheUniverserAtInputLine()
+        {
+            //Arrange
+            var x = 10;
+            var y = 10;
+            var universe = new Grid(x, y);
+            universe.SeedUniverse();
+            var universeSquares = universe.GetUniverse();
+
+            //Act
+            var line = universeSquares.PrintHorizontalLine(0);
+
+            //Assert
+            Assert.Equal(universeSquares[0, 0].Print(), line[0]);
+            Assert.Equal(universeSquares[0, 1].Print(), line[1]);
+        }
        
     }
 }
