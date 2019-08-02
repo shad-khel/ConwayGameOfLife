@@ -8,7 +8,7 @@ namespace ConwaysGameOfLife
     {
         private bool _state;
 
-        public UniverseSquare(bool state)
+        public UniverseSquare(bool state = false)
         {
             _state = state;
         }
@@ -31,6 +31,12 @@ namespace ConwaysGameOfLife
         public bool IsAlive()
         {
             return _state;
+        }
+
+        public void SetToRandomState()
+        {
+            //Ref ExtremeML
+            _state = new Random().Next(100) % 2 == 0;
         }
     }
 }

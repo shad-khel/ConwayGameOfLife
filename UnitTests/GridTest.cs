@@ -36,7 +36,7 @@ namespace UnitTests
             {
                 for (var j = 0; j < universeArray.GetLength(1); j++)
                 {
-                    if (universeArray[i][j].IsAlive())
+                    if (universeArray[i,j].IsAlive())
                     {
                         aliveCheck = true;
                     };
