@@ -8,6 +8,7 @@ namespace ConwaysGameOfLife
     public class Grid
     {
         private readonly UniverseSquare[,] _universe;
+        char _selfToken = '0';
 
         public Grid(int universeWidth, int universeHeight)
         {
@@ -33,15 +34,27 @@ namespace ConwaysGameOfLife
 
         public void Tick()
         {
-            //for (var i = 0; i < _universe.GetLength(0); i++)
-            //{
-            //    for (var j = 0; j < _universe.GetLength(1); j++)
-            //    {
-            //        //Get agjecent squares
-            //        //Apply Find which Rule Applys 
-            //        //Appy Rule
-            //    }
-            //}
+            for (var i = 0; i < _universe.GetLength(0); i++)
+            {
+                for (var j = 0; j < _universe.GetLength(1); j++)
+                {
+                    //Get agjecent squares
+                    //Apply Find which Rule Applys 
+                    //Appy Rule
+                }
+            }
+        }
+
+        public string GetNeighbours(int x, int y)
+        {
+            var s = new[]
+            {
+                _universe[x - 1, y - 1].Print(), _universe[x - 1, y].Print(), _universe[x - 1, y + 1].Print(),
+                _universe[x    , y - 1].Print(), _selfToken                 , _universe[x    , y + 1].Print(),
+                _universe[x + 1, y - 1].Print(), _universe[x + 1, y].Print(), _universe[x + 1, y + 1].Print()
+            };
+        
+            return s.ToString();
         }
     }
 }
