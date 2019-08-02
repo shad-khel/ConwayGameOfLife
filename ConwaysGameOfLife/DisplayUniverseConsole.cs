@@ -14,8 +14,16 @@ namespace ConwaysGameOfLife
             {
                 result = result + universe[line, i].Print();
             }
-
+            
             return result;
+        }
+
+        public static void PrintUniverseInConsole(this UniverseSquare[,] universe)
+        {
+            for (int i = 0; i < universe.GetLength(0); i++)
+            {
+                Console.WriteLine( universe.PrintHorizontalLine(i) );
+            }
         }
     }
 }
