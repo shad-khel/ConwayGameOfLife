@@ -93,6 +93,36 @@ namespace UnitTests
 
             Assert.Equal(stringShouldBeLike.ToString(), test);
         }
-       
+
+
+        [Fact]
+        public void GetNeibour_TopOutsideBounds_AsString()
+        {
+            //Arrange
+            var x = 10;
+            var y = 10;
+            char selfToken = '0';
+            char outsideBoundsToken = 'B';
+            var universe = new Grid(x, y);
+            universe.SeedUniverse();
+
+            var testUniverse = universe.GetUniverse();
+
+            var test = universe.GetNeighbours(0, 3);
+
+            var stringShouldBeLike = new char[9];
+
+            stringShouldBeLike[0] = outsideBoundsToken;
+            stringShouldBeLike[1] = outsideBoundsToken;
+            stringShouldBeLike[2] = outsideBoundsToken;
+            stringShouldBeLike[3] = testUniverse[1, 0].Print();
+            stringShouldBeLike[4] = selfToken; //Self 1, 1
+            stringShouldBeLike[5] = testUniverse[1, 2].Print();
+            stringShouldBeLike[6] = testUniverse[2, 0].Print();
+            stringShouldBeLike[7] = testUniverse[2, 1].Print();
+            stringShouldBeLike[8] = testUniverse[2, 2].Print();
+
+            Assert.Equal(stringShouldBeLike.ToString(), test);
+        }
     }
 }
