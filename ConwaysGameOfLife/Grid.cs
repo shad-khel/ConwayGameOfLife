@@ -40,10 +40,14 @@ namespace ConwaysGameOfLife
                 for (var j = 0; j < _universe.GetLength(1); j++)
                 {
                     //Get agjecent squares
-                    //Apply Find which Rule Applys 
-                    //Appy Rule
+                    var aj = GetNeighbours(i, j);
+                    //Apply Find which Rule Applys
+                    
+                    //Appy Rule to next world
                 }
             }
+
+            //Replace current world with new world
         }
 
         public string GetNeighbours(int x, int y)
