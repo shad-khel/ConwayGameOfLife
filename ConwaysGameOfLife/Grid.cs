@@ -8,8 +8,8 @@ namespace ConwaysGameOfLife
     public class Grid
     {
         private readonly UniverseSquare[,] _universe;
-        char _selfToken = '0';
-        char _outsideBoundsToken = 'B';
+        private const char SelfToken = '0';
+        private const char OutsideBoundsToken = 'B';
 
         public Grid(int universeWidth, int universeHeight)
         {
@@ -51,7 +51,7 @@ namespace ConwaysGameOfLife
             var s = new[]
             {
                 PrintSafeChar(x - 1, y - 1), PrintSafeChar(x - 1, y), PrintSafeChar(x - 1, y + 1),
-                PrintSafeChar(x    , y - 1), _selfToken                 , PrintSafeChar(x    , y + 1),
+                PrintSafeChar(x    , y - 1), SelfToken             , PrintSafeChar(x    , y + 1),
                 PrintSafeChar(x + 1, y - 1), PrintSafeChar(x + 1, y), PrintSafeChar(x + 1, y + 1)
             };
         
@@ -60,13 +60,13 @@ namespace ConwaysGameOfLife
 
         private char PrintSafeChar(int x, int y)
         {
-            if (x > 0 && y > 0)
+            if (x > 0 && y > 0 && y < _universe.GetLength(1) && x < _universe.GetLength(0))
             {
                 return _universe[x, y].Print();
             }
             else
             {
-                return _outsideBoundsToken;
+                return OutsideBoundsToken;
             }
         }
     }
