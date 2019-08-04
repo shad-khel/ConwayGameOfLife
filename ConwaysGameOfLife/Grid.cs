@@ -7,9 +7,11 @@ namespace ConwaysGameOfLife
 {
     public class Grid
     {
-        private readonly UniverseSquare[,] _universe;
+        //I need this to be readOnly but replaceable with the next world
+        private UniverseSquare[,] _universe;
         private const char SelfToken = '0';
         private const char OutsideBoundsToken = 'B';
+        private delegate GridSquareStatusResult UniverseRule(string neighbours, GridSquareStatus cellStatus);
 
         public Grid(int universeWidth, int universeHeight)
         {
@@ -35,19 +37,46 @@ namespace ConwaysGameOfLife
 
         public void Tick()
         {
+            var nextWorld = _universe.Clone() as UniverseSquare[,];
+
             for (var i = 0; i < _universe.GetLength(0); i++)
             {
                 for (var j = 0; j < _universe.GetLength(1); j++)
                 {
                     //Get agjecent squares
                     var aj = GetNeighbours(i, j);
-                    //Apply Find which Rule Applys
+
+                    List<UniverseRule> rr = new List<UniverseRule>
+                    {
+                        new UniverseRule(UniverseRules.Underpopulated),
+                        new UniverseRule(UniverseRules.OverPopulated),
+                        new UniverseRule(UniverseRules.AliveAndCorrectAmountOfNeighboursToLive),
+                        new UniverseRule(UniverseRules.DeadAndCorrectAmountOfNeighboursToLive)
+                    };
+
+                    //Find which Rule Applys
+                    foreach (var rule in rr)
+                    {
+
+                        var result = rule(aj, _universe[i, j].GridStatus() );
+
+                        //Appy Rule to next world
+                        switch (result)
+                        {
+                            case GridSquareStatusResult.Live:
+                                nextWorld[i, j].SetToAlive();
+                                break;
+                            case GridSquareStatusResult.Die:
+                                nextWorld[i, j].SetToDie();
+                                break;
+                        }
+                    }
                     
-                    //Appy Rule to next world
                 }
             }
 
             //Replace current world with new world
+            _universe =  nextWorld;
         }
 
         public string GetNeighbours(int x, int y)
@@ -59,7 +88,7 @@ namespace ConwaysGameOfLife
                 PrintSafeChar(x + 1, y - 1), PrintSafeChar(x + 1, y), PrintSafeChar(x + 1, y + 1)
             };
         
-            return s.ToString();
+            return new string(s);
         }
 
         private char PrintSafeChar(int x, int y)

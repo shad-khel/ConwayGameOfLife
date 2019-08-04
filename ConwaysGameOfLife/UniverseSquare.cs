@@ -33,6 +33,11 @@ namespace ConwaysGameOfLife
             return _state;
         }
 
+        public GridSquareStatus GridStatus()
+        {
+            return _state ? GridSquareStatus.Alive : GridSquareStatus.Dead;
+        }
+
         public void SetToRandomState()
         {
             //Ref ExtremeML

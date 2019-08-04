@@ -26,7 +26,7 @@ namespace ConwaysGameOfLife
         }
        
         //Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-        public static GridSquareStatusResult DeadAndCorrectAmountOfNeighbours(string neighbours, GridSquareStatus cellStatus)
+        public static GridSquareStatusResult DeadAndCorrectAmountOfNeighboursToLive(string neighbours, GridSquareStatus cellStatus)
         {
             var count = neighbours.Split('X').Length - 1;
             if (count == 3 && cellStatus == GridSquareStatus.Dead)
@@ -38,7 +38,7 @@ namespace ConwaysGameOfLife
         }
 
         //Any live cell with two or three live neighbours lives on to the next generation.
-        public static GridSquareStatusResult AliveAndCorrectAmountOfNeighbours(string neighbours, GridSquareStatus cellStatus)
+        public static GridSquareStatusResult AliveAndCorrectAmountOfNeighboursToLive(string neighbours, GridSquareStatus cellStatus)
         {
             var count = neighbours.Split('X').Length - 1;
             if ((count == 3 || count == 2) && cellStatus == GridSquareStatus.Alive)
