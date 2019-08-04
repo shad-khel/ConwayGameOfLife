@@ -12,6 +12,19 @@ namespace ConwaysGameOfLife
         private const char SelfToken = '0';
         private const char OutsideBoundsToken = 'B';
         private delegate GridSquareStatusResult UniverseRule(string neighbours, GridSquareStatus cellStatus);
+        private List<UniverseRule> rr;
+
+        public Grid()
+        {
+            rr = new List<UniverseRule>
+            {
+                new UniverseRule(UniverseRules.Underpopulated),
+                new UniverseRule(UniverseRules.OverPopulated),
+                new UniverseRule(UniverseRules.AliveAndCorrectAmountOfNeighboursToLive),
+                new UniverseRule(UniverseRules.DeadAndCorrectAmountOfNeighboursToLive)
+            };
+        }
+
 
         public Grid(int universeWidth, int universeHeight)
         {
@@ -38,40 +51,36 @@ namespace ConwaysGameOfLife
         public void Tick()
         {
             var nextWorld = _universe.Clone() as UniverseSquare[,];
+            var nextWorldCellResult = GridSquareStatusResult.NoChange;
 
             for (var i = 0; i < _universe.GetLength(0); i++)
             {
                 for (var j = 0; j < _universe.GetLength(1); j++)
                 {
-                    //Get agjecent squares
+                    //Get adjecent squares
                     var aj = GetNeighbours(i, j);
-
-                    List<UniverseRule> rr = new List<UniverseRule>
-                    {
-                        new UniverseRule(UniverseRules.Underpopulated),
-                        new UniverseRule(UniverseRules.OverPopulated),
-                        new UniverseRule(UniverseRules.AliveAndCorrectAmountOfNeighboursToLive),
-                        new UniverseRule(UniverseRules.DeadAndCorrectAmountOfNeighboursToLive)
-                    };
 
                     //Find which Rule Applys
                     foreach (var rule in rr)
                     {
+                        var result = rule( aj, _universe[i, j].GridStatus() );
 
-                        var result = rule(aj, _universe[i, j].GridStatus() );
-
-                        //Appy Rule to next world
-                        switch (result)
+                        if (result == GridSquareStatusResult.Live || result == GridSquareStatusResult.Die)
                         {
-                            case GridSquareStatusResult.Live:
-                                nextWorld[i, j].SetToAlive();
-                                break;
-                            case GridSquareStatusResult.Die:
-                                nextWorld[i, j].SetToDie();
-                                break;
+                            nextWorldCellResult = result;
                         }
                     }
-                    
+
+                    //Appy Rule to next world
+                    switch (nextWorldCellResult)
+                    {
+                        case GridSquareStatusResult.Live:
+                            nextWorld[i, j].SetToAlive();
+                            break;
+                        case GridSquareStatusResult.Die:
+                            nextWorld[i, j].SetToDie();
+                            break;
+                    }
                 }
             }
 
