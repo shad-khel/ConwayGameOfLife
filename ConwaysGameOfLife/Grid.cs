@@ -14,8 +14,10 @@ namespace ConwaysGameOfLife
         private delegate GridSquareStatusResult UniverseRule(string neighbours, GridSquareStatus cellStatus);
         private List<UniverseRule> rr;
 
-        public Grid()
+        public Grid(int universeWidth, int universeHeight)
         {
+            _universe = new UniverseSquare[universeWidth, universeHeight];
+
             rr = new List<UniverseRule>
             {
                 new UniverseRule(UniverseRules.Underpopulated),
@@ -23,12 +25,6 @@ namespace ConwaysGameOfLife
                 new UniverseRule(UniverseRules.AliveAndCorrectAmountOfNeighboursToLive),
                 new UniverseRule(UniverseRules.DeadAndCorrectAmountOfNeighboursToLive)
             };
-        }
-
-
-        public Grid(int universeWidth, int universeHeight)
-        {
-            _universe = new UniverseSquare[universeWidth, universeHeight];
         }
 
         public UniverseSquare[,] GetUniverse()

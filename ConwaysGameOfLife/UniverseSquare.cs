@@ -15,12 +15,12 @@ namespace ConwaysGameOfLife
 
         public void SetToAlive()
         {
-            _state = false;
+            _state = true;
         }
 
         public void SetToDie()
         {
-            _state = true;
+            _state = false;
         }
 
         public char Print()
