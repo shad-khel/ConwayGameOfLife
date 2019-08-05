@@ -77,21 +77,16 @@ namespace UnitTests
 
             var testUniverse = universe.GetUniverse();
 
-            var test = universe.GetNeighbours(3, 3);
+            var test = universe.GetNeighbours(1, 1);
 
-            var stringShouldBeLike = new char[9];
+            var stringShouldBeLike = new[]
+            {
+                testUniverse[0, 0].Print(), testUniverse[0, 1].Print(), testUniverse[0, 2].Print(),
+                testUniverse[1, 0].Print(), selfToken                 , testUniverse[1, 2].Print(),
+                testUniverse[2, 0].Print(), testUniverse[2, 1].Print(), testUniverse[2, 2].Print()
+            };
 
-            stringShouldBeLike[0] = testUniverse[0, 0].Print();
-            stringShouldBeLike[1] = testUniverse[0, 1].Print();
-            stringShouldBeLike[2] = testUniverse[0, 2].Print();
-            stringShouldBeLike[3] = testUniverse[1, 0].Print();  
-            stringShouldBeLike[4] = selfToken; //Self 1, 1
-            stringShouldBeLike[5] = testUniverse[1, 2].Print();
-            stringShouldBeLike[6] = testUniverse[2, 0].Print();
-            stringShouldBeLike[7] = testUniverse[2, 1].Print();
-            stringShouldBeLike[8] = testUniverse[2, 2].Print();
-
-            Assert.Equal(stringShouldBeLike.ToString(), test);
+            Assert.Equal(new string(stringShouldBeLike), test);
         }
 
 
@@ -122,7 +117,7 @@ namespace UnitTests
             stringShouldBeLike[7] = testUniverse[2, 1].Print();
             stringShouldBeLike[8] = testUniverse[2, 2].Print();
 
-            Assert.Equal(stringShouldBeLike.ToString(), test);
+            Assert.Equal(new string(stringShouldBeLike), test);
         }
 
 
@@ -153,7 +148,7 @@ namespace UnitTests
             stringShouldBeLike[7] = testUniverse[2, 1].Print();
             stringShouldBeLike[8] = outsideBoundsToken;
 
-            Assert.Equal(stringShouldBeLike.ToString(), test);
+            Assert.Equal(new string(stringShouldBeLike), test);
         }
 
         [Fact]
@@ -161,7 +156,7 @@ namespace UnitTests
         {
             //Arrange
             var x = 10;
-            var y = 4;
+            var y = 10;
             char selfToken = '0';
             char outsideBoundsToken = 'B';
             var universe = new Grid(x, y);
@@ -169,7 +164,7 @@ namespace UnitTests
 
             var testUniverse = universe.GetUniverse();
 
-            var test = universe.GetNeighbours(10,10);
+            var test = universe.GetNeighbours(9,9);
 
             var stringShouldBeLike = new char[9];
 
@@ -183,7 +178,7 @@ namespace UnitTests
             stringShouldBeLike[7] = outsideBoundsToken;
             stringShouldBeLike[8] = outsideBoundsToken;
 
-            Assert.Equal(stringShouldBeLike.ToString(), test);
+            Assert.Equal(new string(stringShouldBeLike), test);
         }
     }
 }

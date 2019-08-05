@@ -27,6 +27,20 @@ namespace ConwaysGameOfLife
             };
         }
 
+        public Grid(UniverseSquare[,] universe)
+        {
+            _universe = universe;
+
+            //Move these to somthing else
+            rr = new List<UniverseRule>
+            {
+                new UniverseRule(UniverseRules.Underpopulated),
+                new UniverseRule(UniverseRules.OverPopulated),
+                new UniverseRule(UniverseRules.AliveAndCorrectAmountOfNeighboursToLive),
+                new UniverseRule(UniverseRules.DeadAndCorrectAmountOfNeighboursToLive)
+            };
+        }
+
         public UniverseSquare[,] GetUniverse()
         {
             return _universe;
@@ -46,6 +60,7 @@ namespace ConwaysGameOfLife
 
         public void Tick()
         {
+            //You can initialise it with an empty world
             var nextWorld = _universe.Clone() as UniverseSquare[,];
             var nextWorldCellResult = GridSquareStatusResult.NoChange;
 
@@ -98,7 +113,7 @@ namespace ConwaysGameOfLife
 
         private char PrintSafeChar(int x, int y)
         {
-            if (x > 0 && y > 0 && y < _universe.GetLength(1) && x < _universe.GetLength(0))
+            if (x > -1 && y > -1 && y < _universe.GetUpperBound(1) && x < _universe.GetUpperBound(0))
             {
                 return _universe[x, y].Print();
             }
