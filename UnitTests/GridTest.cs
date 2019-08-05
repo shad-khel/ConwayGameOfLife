@@ -186,6 +186,11 @@ namespace UnitTests
         [InlineData(0, 1, "BBB-0--X-")]
         [InlineData(0, 2, "BBBX0BX-B")]
         [InlineData(1, 0, "B-XB0XB-X")]
+        [InlineData(1, 1, "-X--0--X-")]
+        [InlineData(1, 2, "X-BX0BX-B")]
+        [InlineData(2, 0, "B-XB0XBBB")]
+        [InlineData(2, 1, "-X--0-BBB")]
+        [InlineData(2, 2, "X-BX0BBBB")]
         public void GetNeighbourTest1(int x, int y, string expectedResult)
         {
             char selfToken = '0';
