@@ -104,7 +104,7 @@ namespace ConwaysGameOfLife
             var s = new[]
             {
                 PrintSafeChar(x - 1, y - 1), PrintSafeChar(x - 1, y), PrintSafeChar(x - 1, y + 1),
-                PrintSafeChar(x    , y - 1), SelfToken             , PrintSafeChar(x    , y + 1),
+                PrintSafeChar(x    , y - 1), SelfToken              , PrintSafeChar(x    , y + 1),
                 PrintSafeChar(x + 1, y - 1), PrintSafeChar(x + 1, y), PrintSafeChar(x + 1, y + 1)
             };
         
@@ -113,7 +113,7 @@ namespace ConwaysGameOfLife
 
         private char PrintSafeChar(int x, int y)
         {
-            if (x > -1 && y > -1 && y < _universe.GetUpperBound(1) && x < _universe.GetUpperBound(0))
+            if (x > -1 && y > -1 && y < (_universe.GetUpperBound(1) +1) && x < (_universe.GetUpperBound(0)+1) )
             {
                 return _universe[x, y].Print();
             }

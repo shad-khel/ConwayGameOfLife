@@ -9,9 +9,9 @@ namespace ConwaysGameOfLife
         {
             Console.WriteLine("Conways Game of life World!");
 
-           /// var universe = new Grid(100, 100);
+            /// var universe = new Grid(100, 100);
+            /// universe.SeedUniverse();
             var universe = new Grid(GetKnownPattern());
-            universe.SeedUniverse();
 
             for (var i = 0; i < 100; i++)
             {

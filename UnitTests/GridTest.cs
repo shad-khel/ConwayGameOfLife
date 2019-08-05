@@ -180,5 +180,35 @@ namespace UnitTests
 
             Assert.Equal(new string(stringShouldBeLike), test);
         }
+
+        [Theory]
+        [InlineData(0, 0, "BBBB0XB-X")]
+        [InlineData(0, 1, "BBB-0--X-")]
+        [InlineData(0, 2, "BBBX0BX-B")]
+        [InlineData(1, 0, "B-XB0XB-X")]
+        public void GetNeighbourTest1(int x, int y, string expectedResult)
+        {
+            char selfToken = '0';
+            char outsideBoundsToken = 'B';  
+            var universe = new Grid(GetKnownPattern());
+
+            var test = universe.GetNeighbours(x, y);
+            
+
+            Assert.Equal(expectedResult, test);
+        }
+
+
+        public static UniverseSquare[,] GetKnownPattern()
+        {
+            //http://pi.math.cornell.edu/~lipa/mec/lesson6.html
+
+            var example = new UniverseSquare[3, 3];
+            example[0, 0] = new UniverseSquare(false); example[0, 1] = new UniverseSquare(true); example[0, 2] = new UniverseSquare(false);
+            example[1, 0] = new UniverseSquare(false); example[1, 1] = new UniverseSquare(true); example[1, 2] = new UniverseSquare(false);
+            example[2, 0] = new UniverseSquare(false); example[2, 1] = new UniverseSquare(true); example[2, 2] = new UniverseSquare(false);
+
+            return example;
+        }
     }
 }
