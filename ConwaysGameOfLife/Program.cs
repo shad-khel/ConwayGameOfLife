@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Threading;
 
 namespace ConwaysGameOfLife
@@ -9,10 +10,9 @@ namespace ConwaysGameOfLife
         {
             Console.WriteLine("Conways Game of life World!");
 
-            /// var universe = new Grid(100, 100);
-            /// universe.SeedUniverse();
-            var universe = new Grid(GetKnownPattern());
-             
+            var universe = new Grid(20, 20);
+            universe.SeedUniverse();
+            //var universe = new Grid(GetKnownPattern2());
 
             for (var i = 0; i < 100; i++)
             {
@@ -28,16 +28,52 @@ namespace ConwaysGameOfLife
             }
         }
 
-        public static UniverseSquare[,] GetKnownPattern()
+        public static UniverseSquare[,] GetKnownPattern1()
         {
             //http://pi.math.cornell.edu/~lipa/mec/lesson6.html
 
-            var example = new UniverseSquare[3, 3];
-            example[0,0] = new UniverseSquare(false);  example[0,1] = new UniverseSquare(true); example[0, 2] = new UniverseSquare(false);
-            example[1, 0] = new UniverseSquare(false); example[1,1] = new UniverseSquare(true); example[1, 2] = new UniverseSquare(false);
-            example[2, 0] = new UniverseSquare(false); example[2,1] = new UniverseSquare(true); example[2, 2] = new UniverseSquare(false);
+            var n = new UniverseSquare[3, 3];
+            var v = new[]
+            {
+                false,true,false,
+                false,true,false,
+                false,true,false
+            };
 
-            return example;
+            return TranslateBoolArrayTo2DUniverseArray(v, n);
         }
+
+        public static UniverseSquare[,] GetKnownPattern2()
+        {
+
+            var n = new UniverseSquare[5, 5];
+            var v = new[]
+            {
+                false,false,false,false,false,
+                false,true,true,true,false,
+                false,true,false,false,false,
+                false,false,false,false,false,
+                false,false,false,false,false
+            };
+
+            return TranslateBoolArrayTo2DUniverseArray(v, n);
+        }
+
+        public static UniverseSquare[,] TranslateBoolArrayTo2DUniverseArray(bool[] v, UniverseSquare[,] n)
+        {
+          
+            var count = 0;
+            for (int i = 0; i < n.GetLength(0); i++)
+            {
+                for (int j = 0; j < n.GetLength(1); j++)
+                {
+                    n[i, j] = new UniverseSquare(v[count]);
+                    count++;
+                }
+            }
+
+            return n;
+        }
+
     }
 }
