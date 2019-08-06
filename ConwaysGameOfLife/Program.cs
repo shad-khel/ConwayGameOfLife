@@ -12,12 +12,14 @@ namespace ConwaysGameOfLife
             /// var universe = new Grid(100, 100);
             /// universe.SeedUniverse();
             var universe = new Grid(GetKnownPattern());
+             
 
             for (var i = 0; i < 100; i++)
             {
                 Console.WriteLine();
                 Console.WriteLine($"------Tick {i}------");
 
+               
                 universe.GetUniverse().PrintUniverseInConsole();
                 universe.Tick();
 
