@@ -12,7 +12,7 @@ namespace ConwaysGameOfLife
 
             var universe = new Grid(20, 20);
             universe.SeedUniverse();
-            //var universe = new Grid(GetKnownPattern2());
+            //var universe = new Grid(GetKnownPattern3());
 
             for (var i = 0; i < 100; i++)
             {
@@ -58,6 +58,50 @@ namespace ConwaysGameOfLife
 
             return TranslateBoolArrayTo2DUniverseArray(v, n);
         }
+
+        public static UniverseSquare[,] GetKnownPattern3()
+        {
+
+            var n = new UniverseSquare[10, 10];
+            var v = new[]
+            {
+                false,false,false,false,false,false,false,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+                false,false,true,true,true,true,true,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+            };
+
+            return TranslateBoolArrayTo2DUniverseArray(v, n);
+        }
+
+        public static UniverseSquare[,] GetKnownPattern4()
+        {
+
+            var n = new UniverseSquare[10, 10];
+            var v = new[]
+            {
+                false,true,false,false,false,false,false,false,false,false,
+                false,false,true,false,false,false,false,false,false,false,
+                true,true,true,false,false,false,false,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+                false,false,false,false,false,false,false,false,false,false,
+            };
+
+            return TranslateBoolArrayTo2DUniverseArray(v, n);
+        }
+
+
 
         public static UniverseSquare[,] TranslateBoolArrayTo2DUniverseArray(bool[] v, UniverseSquare[,] n)
         {

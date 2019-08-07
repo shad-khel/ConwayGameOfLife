@@ -70,15 +70,11 @@ namespace ConwaysGameOfLife
                     nextWorld[i,j] =  new UniverseSquare(false);
                 }
             }
-
-
-           
-
+             
             for (var i = 0; i < _universe.GetLength(0); i++)
             {
                 for (var j = 0; j < _universe.GetLength(1); j++)
                 {
-
                     var nextWorldCellResult = GridSquareStatusResult.NoChange;
 
                     //Get adjecent squares
